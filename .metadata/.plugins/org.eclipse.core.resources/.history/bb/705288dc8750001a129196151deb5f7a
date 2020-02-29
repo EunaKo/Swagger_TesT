@@ -1,0 +1,5 @@
+package com.swagger.iam_ironMan.domain;
+
+public class Board {
+
+}

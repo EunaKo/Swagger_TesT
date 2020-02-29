@@ -1,0 +1,5 @@
+package com.swagger.iam_ironMan.model;
+
+public class BoardDAOImpl {
+
+}

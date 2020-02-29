@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" 
+uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" 
+uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script> 
+<link rel="stylesheet" href="${path}/include/style.css">
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<%-- <%@ include file="../include/header.jsp" %> --%>
+<script>
+$(function(){
+	$("#btnWrite").click(function(){
+		location.href="${path}/board/write.do";
+	});
+});
+function list(page){
+	location.href="${path}/board/list.do?curPage="+page;
+}
+</script>
+</head>
+<body>
+
+<h2>게시판</h2>
+
+<button type="button" id="btnWrite">글쓰기</button>
+<table border="1" width="600px">
+	<tr>
+		<th>번호</th>
+		<th>제목</th>
+		<th>이름</th>
+		<th>날짜</th>
+		<th>조회수</th>
+	</tr>
+	<!-- forEach var="개별데이터" items="집합데이터" -->
+<c:forEach var="row" items="${list}">
+	<tr>
+		<td>${row.bono}</td>
+		<td>
+<a href="${path}/board/view.do?bno=${row.bno}">
+${row.title}
+</a>
+			<c:if test="${row.cnt > 0}">
+				<span style="color:red;">( ${row.cnt} )</span>
+			</c:if>   
+		</td>
+		<td>${row.name}</td>
+		<td><fmt:formatDate value="${row.regdate}"
+			pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+		<td>${row.viewcnt}</td>
+	</tr>
+</c:forEach>	
+<!-- 페이지 네비게이션 출력 -->
+
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
